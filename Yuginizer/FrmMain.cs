@@ -33,15 +33,7 @@ namespace Yuginizer
             if (Settings.Default.AutocompleteList.Length == 0)
             {
                 tabsMenu.Enabled = false;
-                var autocompleteList = new List<string>();
-                var sets = await API.GetCardSets();
-                var index = 0;
-                foreach (var set in sets)
-                {
-                    autocompleteList.AddRange(await API.GetSetCards(set));
-                    Text = $"Yuginizer - Loading Complete Card List {index++}/{sets.Count()} (one time only)";
-                }
-
+				var autocompleteList = await FetchCardList();
                 Text = "Yuginizer";
                 tbxNewCardsSearch.AutoCompleteCustomSource.AddRange(autocompleteList.ToArray());
                 Settings.Default.AutocompleteList = autocompleteList.ToArray();
@@ -212,5 +204,29 @@ namespace Yuginizer
 				totalValue += (card as Card).Price;
 			return totalValue;
 		}
-    }
+
+		private async Task<List<string>> FetchCardList()
+		{
+			var autocompleteList = new List<string>();
+			var sets = await API.GetCardSets();
+			var index = 0;
+			foreach (var set in sets)
+			{
+				autocompleteList.AddRange(await API.GetSetCards(set));
+				Text = $"Yuginizer - Loading Complete Card List {index++}/{sets.Count()} (this might take a while)";
+			}
+			return autocompleteList;
+		}
+
+		private async void btnUpdateDB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			tabsMenu.Enabled = false;
+			var autocompleteList = await FetchCardList();
+			Text = "Yuginizer";
+			tbxNewCardsSearch.AutoCompleteCustomSource.Clear();
+			tbxNewCardsSearch.AutoCompleteCustomSource.AddRange(autocompleteList.ToArray());
+			Settings.Default.AutocompleteList = autocompleteList.ToArray();
+			tabsMenu.Enabled = true;
+		}
+	}
 }

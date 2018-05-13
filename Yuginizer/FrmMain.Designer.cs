@@ -67,6 +67,7 @@
 			this.lblCardValue = new System.Windows.Forms.Label();
 			this.lblCardRarity = new System.Windows.Forms.Label();
 			this.pbxCardImage = new System.Windows.Forms.PictureBox();
+			this.btnUpdateDB = new System.Windows.Forms.LinkLabel();
 			((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
 			this.splitMain.Panel1.SuspendLayout();
 			this.splitMain.Panel2.SuspendLayout();
@@ -179,6 +180,7 @@
 			// 
 			this.pnlYourCardsHeader.BackColor = System.Drawing.SystemColors.ControlLight;
 			this.pnlYourCardsHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pnlYourCardsHeader.Controls.Add(this.btnUpdateDB);
 			this.pnlYourCardsHeader.Controls.Add(this.btnRefreshTotalValue);
 			this.pnlYourCardsHeader.Controls.Add(this.lblTotalValue);
 			this.pnlYourCardsHeader.Controls.Add(this.lblYourCardsTitle);
@@ -192,7 +194,7 @@
 			// 
 			this.btnRefreshTotalValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRefreshTotalValue.AutoSize = true;
-			this.btnRefreshTotalValue.Location = new System.Drawing.Point(190, 40);
+			this.btnRefreshTotalValue.Location = new System.Drawing.Point(128, 40);
 			this.btnRefreshTotalValue.Name = "btnRefreshTotalValue";
 			this.btnRefreshTotalValue.Size = new System.Drawing.Size(62, 13);
 			this.btnRefreshTotalValue.TabIndex = 2;
@@ -563,6 +565,18 @@
 			this.pbxCardImage.TabStop = false;
 			this.pbxCardImage.Visible = false;
 			// 
+			// btnUpdateDB
+			// 
+			this.btnUpdateDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnUpdateDB.AutoSize = true;
+			this.btnUpdateDB.Location = new System.Drawing.Point(189, 40);
+			this.btnUpdateDB.Name = "btnUpdateDB";
+			this.btnUpdateDB.Size = new System.Drawing.Size(63, 13);
+			this.btnUpdateDB.TabIndex = 3;
+			this.btnUpdateDB.TabStop = true;
+			this.btnUpdateDB.Text = "Update DB";
+			this.btnUpdateDB.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.btnUpdateDB_LinkClicked);
+			// 
 			// FrmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -642,6 +656,7 @@
         private System.Windows.Forms.ListBox lstSearchResults;
         private System.Windows.Forms.LinkLabel btnSellCard;
         private System.Windows.Forms.Label lblPrintTag;
-    }
+		private System.Windows.Forms.LinkLabel btnUpdateDB;
+	}
 }
 
