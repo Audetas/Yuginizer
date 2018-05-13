@@ -100,6 +100,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\databasedefault.bin" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,8 +108,6 @@
   <ItemGroup>
     <Content Include="yugoh.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

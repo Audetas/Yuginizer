@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Yuginizer.Properties;
 
 namespace Yuginizer
 {
@@ -52,7 +54,21 @@ namespace Yuginizer
             }
             else
             {
-                _default = new Settings();
+				var result = MessageBox.Show(
+					"No database detected!\nClick 'YES' to build a new copy (may take a few minutes).\nClick 'NO' to use a cached copy (may be out of date).",
+					"Yuginizer",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+				if (result == DialogResult.Yes)
+					_default = new Settings();
+				else
+				{
+					File.WriteAllBytes(_path, Resources.databasedefault);
+					ReadSettings();
+					MessageBox.Show(
+						"You are using a card database from 5/13/18. You may want to rebuild the database if new sets have been released since said date.",
+						"Yuginizer");
+				}
             }
         }
     }
