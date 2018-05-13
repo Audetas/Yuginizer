@@ -149,9 +149,7 @@ namespace Yuginizer
 
         private void lstYourCards_ItemAdded()
         {
-            var totalValue = 0m;
-            foreach (var card in lstYourCards.Items)
-                totalValue += (card as Card).Price;
+			var totalValue = GetTotalCardValue();
             lblTotalValue.Text = $"Total Value: ${totalValue}";
             lblYourCardsTitle.Text = $"Your Cards ({lstYourCards.Items.Count})";
             Settings.Default.Cards = lstYourCards.Items.Cast<Card>().ToArray();
@@ -163,7 +161,8 @@ namespace Yuginizer
             btnRefreshTotalValue.Enabled = false;
             int index = 0;
 			var items = lstYourCards.Items.Cast<Card>().ToArray();
-            foreach (var card in items)
+
+			foreach (var card in items)
             {
                 var cardInstance = card as Card;
                 cardInstance.Price = await API.GetCardPrice(cardInstance);
@@ -199,5 +198,13 @@ namespace Yuginizer
             if (e.KeyCode == Keys.Oemplus)
                 btnAddCard_Click(this, EventArgs.Empty);
         }
+
+		private decimal GetTotalCardValue()
+		{
+			var totalValue = 0m;
+			foreach (var card in lstYourCards.Items)
+				totalValue += (card as Card).Price;
+			return totalValue;
+		}
     }
 }
