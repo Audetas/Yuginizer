@@ -162,7 +162,8 @@ namespace Yuginizer
         {
             btnRefreshTotalValue.Enabled = false;
             int index = 0;
-            foreach (var card in lstYourCards.Items)
+			var items = lstYourCards.Items.Cast<Card>().ToArray();
+            foreach (var card in items)
             {
                 var cardInstance = card as Card;
                 cardInstance.Price = await API.GetCardPrice(cardInstance);
