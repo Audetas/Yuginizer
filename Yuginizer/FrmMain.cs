@@ -161,6 +161,7 @@ namespace Yuginizer
             btnRefreshTotalValue.Enabled = false;
             int index = 0;
 			var items = lstYourCards.Items.Cast<Card>().ToArray();
+			var originalValue = GetTotalCardValue();
 
 			foreach (var card in items)
             {
@@ -168,6 +169,11 @@ namespace Yuginizer
                 cardInstance.Price = await API.GetCardPrice(cardInstance);
                 Text = $"Yuginizer - Updating Prices: {index++}/{lstYourCards.Items.Count}";
             }
+
+			MessageBox.Show(
+				$"Refresh complete!\nYour total card value went from ${originalValue} to ${GetTotalCardValue()}.", 
+				"Refresh Complete", 
+				MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             lstYourCards_ItemAdded();
             btnRefreshTotalValue.Enabled = true;
